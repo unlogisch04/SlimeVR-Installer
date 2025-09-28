@@ -89,7 +89,7 @@ InstallDir "$PROGRAMFILES\SlimeVR Server" ; $InstDir default value. Defaults to 
 ShowInstDetails show
 ShowUninstDetails show
 
-BrandingText "SlimeVR Installer 0.2.2"
+BrandingText "SlimeVR Installer 0.2.2 custom vcredist by unlogisch"
 
 # Admin rights are required for:
 # 1. Removing Start Menu shortcut in Windows 7+
@@ -726,7 +726,7 @@ Function componentsPre
     ${Else}
         SectionSetFlags ${SEC_VRDRIVER} ${SF_SELECTED}
         SectionSetFlags ${SEC_FEEDER_APP} ${SF_SELECTED}
-        SectionSetFlags ${SEC_MSVCPP} ${SF_SELECTED}|${SF_RO}
+        SectionSetFlags ${SEC_MSVCPP} ${SF_SELECTED}
     ${EndIf}
 
     # Select JRE Mandatory if not found or outdated on Repair Preselect it
@@ -772,18 +772,18 @@ Function componentsPre
     ${EndIf}
 FunctionEnd
 
-Function .onSelChange
-    SectionGetFlags ${SEC_VRDRIVER} $0
-    IntOp $0 $0 & ${SF_SELECTED}
-    SectionGetFlags ${SEC_FEEDER_APP} $1
-    IntOp $1 $1 & ${SF_SELECTED}
-    IntOp $0 $0 | $1
-    ${If} $0 == ${SF_SELECTED}
-        SectionSetFlags ${SEC_MSVCPP} ${SF_SELECTED}|${SF_RO}
-    ${Else}
-        SectionSetFlags ${SEC_MSVCPP} ${SF_USELECTED}|${SF_RO}
-    ${EndIf}
-FunctionEnd
+;Function .onSelChange
+;    SectionGetFlags ${SEC_VRDRIVER} $0
+;    IntOp $0 $0 & ${SF_SELECTED}
+;    SectionGetFlags ${SEC_FEEDER_APP} $1
+;    IntOp $1 $1 & ${SF_SELECTED}
+;    IntOp $0 $0 | $1
+;    ${If} $0 == ${SF_SELECTED}
+;        SectionSetFlags ${SEC_MSVCPP} ${SF_SELECTED}|${SF_RO}
+;    ${Else}
+;        SectionSetFlags ${SEC_MSVCPP} ${SF_USELECTED}|${SF_RO}
+;    ${EndIf}
+;FunctionEnd
 
 Section "-un.SlimeVR Server" un.SEC_SERVER
     # Remove the shortcuts
